@@ -18,7 +18,7 @@ const authControllers = {
             user.save()
                 .then(user => res.status(200).json(user))
         } catch (error) {
-            res.status(500).json(error);
+            res.status(422).json(error);
         }
     },
     //[Post] /auth/login

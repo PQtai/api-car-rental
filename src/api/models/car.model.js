@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import {AddressSchema} from './address.model.js';
 const {Schema} = mongoose;
 const CarSchema = new Schema({
-    gender : {type : mongoose.Schema.Types.ObjectId , required : true , ref : 'Genders'},
+    genre : {type : mongoose.Schema.Types.ObjectId , required : true , ref : 'Genres'},
     name : {type : String, required : true,unique : true, minLength : 2 },
     unitPrice : {type : Number, required : true},
     insuranceFees : {type : Number, required : true},
