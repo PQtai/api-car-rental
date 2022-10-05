@@ -4,7 +4,7 @@ const carControllers = {
     // [Get]/car
     index : async (req, res, next) => {
         try {
-            const cars = await Car.find({});
+            const cars = await Car.find({}).populate('genre','name');
             res.status(200).json(cars);
         } catch (error) {
             res.status(500).json(error.message);
@@ -27,7 +27,7 @@ const carControllers = {
     // [Get]/car/:slug
     show : async (req, res, next) => {
         try {
-            const car = await Car.findOne({slug:req.params.slug});
+            const car = await Car.findOne({_id:req.params.id}).populate('genre','name');
             res.status(201).json(car);
         } catch (error) {
             res.status(500).json(error.message);

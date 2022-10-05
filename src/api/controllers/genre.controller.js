@@ -4,7 +4,7 @@ const genreControllers = {
     // [Get]/genre
     index : async (req, res, next) => {
         try {
-            const genres = await Genre.find({});
+            const genres = await Genre.find({}).populate('cars');
             res.status(200).json(genres);
         } catch (error) {
             res.status(500).json(error.message);
@@ -23,7 +23,7 @@ const genreControllers = {
     // [Get]/genre/:id
     show : async (req, res, next) => {
         try {
-            const genre = await Genre.findById({_id:req.params.id});
+            const genre = await Genre.findById({_id:req.params.id}).populate('cars');;
             res.status(201).json(genre);
         } catch (error) {
             res.status(500).json(error.message);
