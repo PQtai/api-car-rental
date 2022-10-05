@@ -14,7 +14,6 @@ const CarSchema = new Schema({
     description : {type : String, required : true,minLength : 10},
     seats : {type :Number, required : true},
     fuel : {type : String, required : true},
-    address : AddressSchema,
 },{timestamps: true})
 const Car = mongoose.model('Car', CarSchema);
 export {Car , CarSchema} ;
