@@ -20,5 +20,14 @@ const genreControllers = {
             res.status(422).json(error.message);
         }
     },
+    // [Get]/genre/:id
+    show : async (req, res, next) => {
+        try {
+            const genre = await Genre.findById({_id:req.params.id});
+            res.status(201).json(genre);
+        } catch (error) {
+            res.status(500).json(error.message);
+        }
+    },
 }
 export default genreControllers;

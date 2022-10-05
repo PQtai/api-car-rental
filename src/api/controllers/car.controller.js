@@ -12,7 +12,6 @@ const carControllers = {
     },
     // [Get]/car/create
     create : async (req, res, next) => {
-        console.log("concac");
         try {
             const newCar = await new  Car(req.body);
             const saveCar = await newCar.save();
@@ -23,6 +22,15 @@ const carControllers = {
             res.status(201).json(saveCar);
         } catch (error) {
             res.status(422).json(error.message);
+        }
+    },
+    // [Get]/car/:slug
+    show : async (req, res, next) => {
+        try {
+            const car = await Car.findOne({slug:req.params.slug});
+            res.status(201).json(car);
+        } catch (error) {
+            res.status(500).json(error.message);
         }
     },
 }
