@@ -24,11 +24,31 @@ const carControllers = {
             res.status(422).json(error.message);
         }
     },
-    // [Get]/car/:slug
+    // [Get]/car/:id
     show : async (req, res, next) => {
         try {
             const car = await Car.findOne({_id:req.params.id}).populate('genre','name');
             res.status(201).json(car);
+        } catch (error) {
+            res.status(500).json(error.message);
+        }
+    },
+    // [delete]/car/:id
+    delete : async (req, res, next) => {
+        try {
+            await Car.findByIdAndDelete({_id:req.params.id});
+            res.status(201).json("Delete successfully");
+        } catch (error) {
+            res.status(500).json(error.message);
+        }
+    },
+    //// [update]/:id/edit
+    update : async (req, res, next) => {
+        try {
+           const updateCar =  await Car.findOneAndUpdate({_id:req.params.id},req.body,{
+                new: true
+              });
+            res.status(201).json(updateCar);
         } catch (error) {
             res.status(500).json(error.message);
         }

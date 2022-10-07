@@ -1,7 +1,10 @@
 import express from 'express';
 import carControllers from '../controllers/car.controller.js';
+import authMiddleware from '../middlewares/auth.middleware.js';
 const router = express.Router();
 router.post('/create', carControllers.create);
 router.get('/:id', carControllers.show);
+router.delete('/:id', authMiddleware.authIsAdmin ,carControllers.delete);
+router.patch('/:id/edit' ,carControllers.update);
 router.get('/', carControllers.index);
 export default router;

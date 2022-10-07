@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import {AddressSchema} from './address.model.js';
 const {Schema} = mongoose;
 const CarSchema = new Schema({
     genre : {type : mongoose.Schema.Types.ObjectId , required : true , ref : 'Genre'},

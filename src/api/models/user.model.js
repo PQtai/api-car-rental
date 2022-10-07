@@ -14,15 +14,15 @@ const UserSchema = new Schema({
     }, 
     password : {type : String , required : true},
     email : {type : String , required : true , unique : true},
-    isAimin : {
+    isAdmin : {
         type : Boolean , 
         default : false, 
     },
-    car : CarSchema,
+    ownCar :CarSchema,
     rentedCars : [
         {
             type : mongoose.Schema.Types.ObjectId,
-            ref : "Car",
+            ref : "RentedCarInfo",
         },
     ]
 },{timestamps: true});
