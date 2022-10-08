@@ -27,7 +27,7 @@ const carControllers = {
     // [Get]/car/:id
     show : async (req, res, next) => {
         try {
-            const car = await Car.findOne({_id:req.params.id}).populate('genre','name');
+            const car = await Car.findOne({_id:req.params.id}).populate('genre','label');
             res.status(201).json(car);
         } catch (error) {
             res.status(500).json(error.message);
