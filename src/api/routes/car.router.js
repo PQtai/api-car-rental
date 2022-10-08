@@ -5,6 +5,6 @@ const router = express.Router();
 router.post('/create', carControllers.create);
 router.get('/:id', carControllers.show);
 router.delete('/:id', authMiddleware.authIsAdmin ,carControllers.delete);
-router.patch('/:id/edit' ,carControllers.update);
+router.patch('/:id/edit' ,authMiddleware.authIsAdmin,carControllers.update);
 router.get('/', carControllers.index);
 export default router;
