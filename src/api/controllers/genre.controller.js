@@ -29,5 +29,25 @@ const genreControllers = {
             res.status(500).json(error.message);
         }
     },
+    // [delete]/genre/:id
+    delete : async (req, res, next) => {
+        try {
+            await Genre.findByIdAndDelete({_id:req.params.id});
+            res.status(201).json("Delete successfully");
+        } catch (error) {
+            res.status(500).json(error.message);
+        }
+    },
+    //// [update]genre/:id/edit
+    update : async (req, res, next) => {
+        try {
+           const updateGenre =  await Genre.findOneAndUpdate({_id:req.params.id},req.body,{
+                new: true
+              });
+            res.status(201).json(updateGenre);
+        } catch (error) {
+            res.status(500).json(error.message);
+        }
+    },
 }
 export default genreControllers;

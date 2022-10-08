@@ -110,6 +110,26 @@ const authControllers = {
         } catch (error) {
             res.status(500).json(error.message);
         }
-    }
+    },
+    // [delete]/auth/:id
+    delete : async (req, res, next) => {
+        try {
+            await User.findByIdAndDelete({_id:req.params.id});
+            res.status(201).json("Delete successfully");
+        } catch (error) {
+            res.status(500).json(error.message);
+        }
+    },
+    //// [update]auth/:id/edit
+    update : async (req, res, next) => {
+        try {
+           const updateUser =  await User.findOneAndUpdate({_id:req.params.id},req.body,{
+                new: true
+              });
+            res.status(201).json(updateUser);
+        } catch (error) {
+            res.status(500).json(error.message);
+        }
+    },
 }
 export default authControllers;

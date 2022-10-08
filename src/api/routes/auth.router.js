@@ -7,5 +7,7 @@ router.post('/login', authControllers.login);
 //route register
 router.post('/register', authControllers.register);
 router.post('/logout',authControllers.logout);
+router.delete('/:id', authMiddleware.authIsAdmin ,authControllers.delete);
+router.patch('/:id/edit' ,authMiddleware.authIsAdmin,authControllers.update);
 router.get('/refresh',authMiddleware.verifyToken,authControllers.reqRefreshToken);
 export default router;

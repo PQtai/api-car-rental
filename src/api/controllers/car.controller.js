@@ -42,7 +42,7 @@ const carControllers = {
             res.status(500).json(error.message);
         }
     },
-    //// [update]/:id/edit
+    //// [update]car/:id/edit
     update : async (req, res, next) => {
         try {
            const updateCar =  await Car.findOneAndUpdate({_id:req.params.id},req.body,{
