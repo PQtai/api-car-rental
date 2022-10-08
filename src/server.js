@@ -8,6 +8,15 @@ import routes from './api/routes/index.js';
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
+// Add Access Control Allow Origin headers
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://api-rental-carl.herokuapp.com");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
 app.use(cors());
 app.use(morgan("combined"));
 app.use(bodyParser.json({limit : "50mb"}));
