@@ -4,7 +4,7 @@ import authMiddleware from '../middlewares/auth.middleware.js';
 const router = express.Router();
 router.post('/create', carControllers.create);
 router.get('/:id', carControllers.show);
-router.delete('/:id', authMiddleware.authIsAdmin ,carControllers.delete);
+router.delete('/:id',carControllers.delete);
 router.patch('/:id/edit' ,carControllers.update);
 router.get('/', carControllers.index);
 export default router;
