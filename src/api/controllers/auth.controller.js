@@ -31,7 +31,7 @@ const authControllers = {
                 isAdmin : user.isAdmin
             },
             process.env.JWT_ACCESSTOKEN_KEY,
-            {expiresIn : "2h"}
+            {expiresIn : "24h"}
         );
     },
     //generate refresh Token
