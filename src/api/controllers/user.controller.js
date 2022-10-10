@@ -8,6 +8,15 @@ const userControllers = {
         } catch (error) {
             res.status(500).json(error.message);
         }
-    }
+    },
+    // [Get]/user/:id
+    show : async (req, res, next) => {
+        try {
+            const user = await User.findOne({_id:req.params.id});
+            res.status(201).json(user);
+        } catch (error) {
+            res.status(500).json(error.message);
+        }
+    },
 }
 export default userControllers;
