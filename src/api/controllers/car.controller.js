@@ -13,7 +13,7 @@ const carControllers = {
     // [Get]/car/create
     create : async (req, res, next) => {
         try {
-            const newCar = await new  Car(req.body);
+            const newCar = await Car.create(req.body);
             const saveCar = await newCar.save();
             if(req.body.genre){
                 const genre = await Genre.findById(req.body.genre);
