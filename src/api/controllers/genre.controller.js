@@ -13,7 +13,7 @@ const genreControllers = {
     // [Get]/genre/create
     create : async (req, res, next) => {
         try {
-            const newGenre = await new Genre(req.body);
+            const newGenre = await  Genre.insertOne(req.body);
             const saveGenre = newGenre.save();
             res.status(201).json(saveGenre);
         } catch (error) {
