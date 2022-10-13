@@ -4,14 +4,17 @@ import jwt from "jsonwebtoken";
 
 const refreshTokens = [];
 const authControllers = {
-
+    encryption : async (password ) => {
+        const saltRounds = await bcrypt.genSalt(10);
+        return await bcrypt.hash(password ,saltRounds);
+    },
     //Vẫn chưa xử lý chỗ refreshToken khi bị đánh cắp hoặc khi người dùng đăng xuất thì
     //phải xoá refreshToken khỏi dữ liệu không còn sử dụng được nữa Tìm hiểu thằng Redis
     //[Post] /auth/register
     register : async (req, res, next) => {
         try {
-            const saltRounds = await bcrypt.genSalt(10);
-            const hashed = await bcrypt.hash(req.body.password ,saltRounds);
+            // const saltRounds = await bcrypt.genSalt(10);
+            const hashed = await authControllers.encryption(req.body.password);
             const user = await User.create({
                 ...req.body,
                 password: hashed,
@@ -123,10 +126,14 @@ const authControllers = {
     //// [update]auth/:id/edit
     update : async (req, res, next) => {
         try {
+        if(req.body.password){
+            req.body.password = await authControllers.encryption(req.body.password);
+        }
            const updateUser =  await User.findOneAndUpdate({_id:req.params.id},req.body,{
                 new: true
               });
-            res.status(201).json(updateUser);
+            const {password , ...needful} = updateUser.toObject();
+            res.status(201).json({...needful});
         } catch (error) {
             res.status(500).json(error.message);
         }
