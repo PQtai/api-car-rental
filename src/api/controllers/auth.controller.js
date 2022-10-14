@@ -126,12 +126,21 @@ const authControllers = {
     //// [update]auth/:id/edit
     update : async (req, res, next) => {
         try {
-        if(req.body.password){
-            req.body.password = await authControllers.encryption(req.body.password);
-        }
-           const updateUser =  await User.findOneAndUpdate({_id:req.params.id},req.body,{
+            //validate password and encryption
+            if(req.body.password){
+                const user = await User.findById(req.params.id);
+                const validPassword = await bcrypt.compare(
+                    req.body.password,
+                    user.password
+                );
+                if(!validPassword){
+                    return res.status(404).json("password is incorrect");
+                }
+                req.body.password = await authControllers.encryption(req.body.newPassword);
+            }
+            const updateUser =  await User.findOneAndUpdate({_id:req.params.id},req.body,{
                 new: true
-              });
+            });
             const {password , ...needful} = updateUser.toObject();
             res.status(201).json({...needful});
         } catch (error) {
