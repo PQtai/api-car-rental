@@ -19,8 +19,11 @@ const authControllers = {
                 ...req.body,
                 password: hashed,
             });
-            user.save();
-            //login luôn tại đây
+            const saveUser = await user.save();
+            if(req.body.isAdmin === true) {
+                return res.status(200).json(saveUser);
+            }
+            //Nếu người dùng đăng ký 1 tài khoản login luôn tại đây
             authControllers.login(req, res, next);
         } catch (error) {
             res.status(422).json(error);
