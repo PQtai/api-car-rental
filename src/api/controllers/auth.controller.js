@@ -62,21 +62,21 @@ const authControllers = {
         try {
             const user = await User.findOne({email: req.body.email});
             if(!user){
-                res.status(404).json("wrong email");
+                return res.status(404).json("wrong email");
             };
             const validPassword = await bcrypt.compare(
                 req.body.password,
                 user.password
             );
             if(!validPassword){
-                res.status(404).json("password is incorrect");
+               return res.status(404).json("password is incorrect");
             }
             if(validPassword && user){
                 const accessToken = authControllers.generateAccessToken(user);
                 const refreshToken = authControllers.generateRefreshToken(user);
                 authControllers.storeRefreshToken(res , refreshToken);
                 const {password , ...needful} = user.toObject();
-                res.status(200).json({...needful , accessToken});
+                return res.status(200).json({...needful , accessToken});
             }
         } catch (error) {
             res.status(500).json(error);
