@@ -6,6 +6,7 @@ const router = express.Router();
 router.post('/login', authControllers.login);
 //route register
 router.post('/register', authControllers.register);
+router.post('/admin/register',authMiddleware.authIsAdmin ,authControllers.register);
 router.post('/logout',authControllers.logout);
 router.delete('/:id', authMiddleware.authIsAdmin ,authControllers.delete);
 router.patch('/:id/edit' ,authMiddleware.authIsAdmin,authControllers.update);

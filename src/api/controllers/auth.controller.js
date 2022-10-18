@@ -20,7 +20,7 @@ const authControllers = {
                 password: hashed,
             });
             const saveUser = await user.save();
-            if(req.body.isAdmin === true) {
+            if(req.user?.isAdmin === true) {
                 return res.status(200).json(saveUser);
             }
             //Nếu người dùng đăng ký 1 tài khoản login luôn tại đây
