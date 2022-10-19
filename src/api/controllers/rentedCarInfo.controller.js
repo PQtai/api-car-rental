@@ -1,6 +1,15 @@
 import { RentedCarInfo,Car,User } from "../models/index.js";
 
 const rentedCarInfoControllers = {
+     // [Get]/rentedCarInfo
+     index : async (req, res, next) => {
+        try {
+            const rentedCarInfos = await RentedCarInfo.find({}).populate('car_id').populate('user_id');
+            res.status(200).json(rentedCarInfos);
+        } catch (error) {
+            res.status(500).json(error.message);
+        }
+    },
     // [Post]/rentedCarInfo/create
     create : async (req, res, next) => {
         try {
