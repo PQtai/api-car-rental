@@ -6,6 +6,7 @@ const RentedCarInfoSchema = new Schema({
     rentDate : {type : Date , required : true},
     returnDate : {type : Date , required : true},
     totalPrice : {type : Number , required : true},
+    plight : {type : String , default : 'Vừa đặt'},
 },{timestamps: true});
 const RentedCarInfo = mongoose.model('RentedCarInfo', RentedCarInfoSchema);
-export default RentedCarInfo;
+export {RentedCarInfoSchema ,RentedCarInfo } ;
