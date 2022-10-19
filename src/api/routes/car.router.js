@@ -3,6 +3,7 @@ import carControllers from '../controllers/car.controller.js';
 import authMiddleware from '../middlewares/auth.middleware.js';
 const router = express.Router();
 router.post('/create', carControllers.create);
+router.get('/search', carControllers.search);
 router.get('/:id', carControllers.show);
 router.delete('/:id',carControllers.delete);
 router.patch('/:id/edit' ,carControllers.update);

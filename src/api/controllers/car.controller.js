@@ -24,6 +24,16 @@ const carControllers = {
             res.status(422).json(error.message);
         }
     },
+    // [Get]/car/search
+    search : async (req, res, next) => {
+        try {
+            const searchQuery = new RegExp(`${req.query.q}`, 'i')
+            const cars = await Car.find({ name : { $regex : searchQuery}}).populate('genre','label');
+            res.status(201).json(cars);
+        } catch (error) {
+            res.status(500).json(error.message);
+        }
+    },
     // [Get]/car/:id
     show : async (req, res, next) => {
         try {
