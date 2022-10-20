@@ -40,5 +40,16 @@ const rentedCarInfoControllers = {
             res.status(500).json(error.message);
         }
     },
+     //// [update]rentedCarInfo/:id/edit
+     update : async (req, res, next) => {
+        try {
+           const updateRentedCarInfo =  await RentedCarInfo.findOneAndUpdate({_id:req.params.id},req.body,{
+                new: true
+              });
+            res.status(201).json(updateRentedCarInfo);
+        } catch (error) {
+            res.status(500).json(error.message);
+        }
+    },
 }
 export default rentedCarInfoControllers;
