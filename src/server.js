@@ -7,9 +7,9 @@ import db from './config/Database.config.js';
 import routes from './api/routes/index.js';
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 3000;
 // Add headers before the routes are defined
 app.use(cors());
+const PORT = process.env.PORT || 3000;
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
