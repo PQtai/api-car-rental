@@ -4,7 +4,7 @@ const carControllers = {
     // [Get]/car
     index : async (req, res, next) => {
         try {
-            const cars = await Car.find({}).populate('genre','label');
+            const cars = await Car.find({available : true}).populate('genre','label');
             res.status(200).json(cars);
         } catch (error) {
             res.status(500).json(error.message);
@@ -28,7 +28,10 @@ const carControllers = {
     search : async (req, res, next) => {
         try {
             const searchQuery = new RegExp(`${req.query.q}`, 'i')
-            const cars = await Car.find({ name : { $regex : searchQuery}}).populate('genre','label');
+            const cars = await Car.find({ 
+                name : { $regex : searchQuery},
+                available : true
+            }).populate('genre','label');
             res.status(201).json(cars);
         } catch (error) {
             res.status(500).json(error.message);
