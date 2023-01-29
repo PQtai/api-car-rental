@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { AuthenInfoSchema } from './authenInfo.model.js';
 import { CarSchema} from './car.model.js';
 const {Schema} = mongoose;
 const UserSchema = new Schema({
@@ -24,7 +25,8 @@ const UserSchema = new Schema({
             type : mongoose.Schema.Types.ObjectId,
             ref : "RentedCarInfo",
         },
-    ]
+    ],
+    authenInfo : AuthenInfoSchema
 },{timestamps: true});
 const User = mongoose.model('User', UserSchema);
 export default User;

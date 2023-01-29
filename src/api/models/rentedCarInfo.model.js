@@ -7,9 +7,7 @@ const RentedCarInfoSchema = new Schema({
     returnDate : {type : Date , required : true},
     totalPrice : {type : Number , required : true},
     phone : {type : String , required : true},
-    gplx : {type : String , required : true},
     totalDays : {type : Number , required : true},
-    birthday : {type : Date , required : true},
     plight : {type : String , default : 'Vừa đặt'},
 },{timestamps: true});
 const RentedCarInfo = mongoose.model('RentedCarInfo', RentedCarInfoSchema);

@@ -3,10 +3,12 @@ import carRouter from './car.router.js';
 import userRouter from './user.router.js';
 import genreRouter from './genre.router.js';
 import rentedCarInfoRouter from './rentedCarInfo.router.js';
+import authenInfoRouter from './authenInfo.router.js';
 const routes = (app) => {
     app.use('/auth',   authRouter );
     app.use('/car',   carRouter );
     app.use('/rentedCarInfo', rentedCarInfoRouter );
+    app.use('/authenInfo', authenInfoRouter );
     app.use('/user',   userRouter );
     app.use('/genre',   genreRouter );
 }
